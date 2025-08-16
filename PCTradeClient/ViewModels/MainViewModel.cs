@@ -11,10 +11,7 @@ namespace PCTradeClient.ViewModels
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel {
             get => _currentViewModel;
-            set {
-                _currentViewModel = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref _currentViewModel, value);
         }
 
         private readonly IAuthenticationService _authService;

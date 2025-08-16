@@ -32,9 +32,9 @@ namespace PCTradeClient {
             Services = services.BuildServiceProvider();
 
             // Show MainWindow with injected DataContext
-            var mainWindow = new MainWindow {
-                DataContext = Services.GetRequiredService<MainViewModel>()
-            };
+            //var mainWindow = new MainWindow {
+            //    DataContext = Services.GetRequiredService<MainViewModel>()
+            //};
             //mainWindow.Show();
         }
     }
