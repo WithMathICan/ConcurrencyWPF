@@ -77,6 +77,7 @@ namespace Wpf {
                 ProgressTextServer.Text = $"Progress: {(value * 100):F1}%";
             });
             IProgress<string> stringResult = new Progress<string>(message => TextBoxFromServerProgress.Text = message);
+            IProgress<string> errorResult = new Progress<string>(message => MessageBox.Show(message, "Error"));
 
             var connection = new HubConnectionBuilder()
                 .WithUrl("http://localhost:5000/progressHub") 
@@ -84,6 +85,7 @@ namespace Wpf {
 
             connection.On<double>("UpdateProgress", value => progress.Report(value));
             connection.On<string>("ReceiveResult", message => stringResult.Report(message));
+            connection.On<string>("ReceiveError", message => errorResult.Report(message));
 
             try {
                 await connection.StartAsync();
