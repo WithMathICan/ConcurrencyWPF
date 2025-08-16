@@ -1,9 +1,16 @@
 ﻿<Application x:Class="PCTradeClient.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PCTradeClient"
+             xmlns:local="clr-namespace:PCTradeClient" 
+             xmlns:views="clr-namespace:PCTradeClient.Views" 
+             xmlns:vm="clr-namespace:PCTradeClient.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+            <views:LoginView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AppViewModel}">
+            <views:AppView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
