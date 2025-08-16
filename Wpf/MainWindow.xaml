@@ -21,5 +21,13 @@
         <ProgressBar x:Name="ProgressBar" Grid.Row="0" Grid.Column="0" Minimum="0" Maximum="100" Height="20" Margin="10" />
         <Button Grid.Row="0" Grid.Column="1" Content="Load" Height="40" Width="150" Margin="10" Click="LoadButton_Click"/>
         <Button Grid.Row="0" Grid.Column="2" Content="Cancel" Height="40" Width="150" Margin="10" Click="CancelButton_Click"/>
+        <ProgressBar x:Name="FromServerProgressBar" Grid.Row="1" Grid.Column="0" Minimum="0" Maximum="100" Height="20" Margin="10" />
+        <TextBlock   x:Name="ProgressText" Text="50%" HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            FontWeight="Bold" 
+            Grid.Row="1" 
+            Grid.Column="0" />
+        <Button Grid.Row="1" Grid.Column="1" Content="Load" Height="40" Width="150" Margin="10" Click="LoadFromServerButton_Click"/>
+        <TextBox x:Name="TextBoxFromServer" Text="Initial" Grid.Row="1" Grid.Column="2"/>
     </Grid>
 </Window>

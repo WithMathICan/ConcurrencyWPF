@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Net.Http;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Wpf {
@@ -29,11 +30,31 @@ namespace Wpf {
             _cts?.Cancel();
         }
 
-        private async Task DoWorkAsync(IProgress<int> progress, CancellationToken cancellationToken) {
+        private static async Task DoWorkAsync(IProgress<int> progress, CancellationToken cancellationToken) {
             for (int i = 0; i <= 100; i += 10) {
                 cancellationToken.ThrowIfCancellationRequested();
-                await Task.Delay(500, cancellationToken); // Имитация работы
-                progress.Report(i); // Сообщаем о прогрессе
+                await Task.Delay(500, cancellationToken); 
+                progress.Report(i);
+            }
+        }
+
+        private async void LoadFromServerButton_Click(object sender, RoutedEventArgs e) {
+            TextBoxFromServer.Text = "Result";
+            using var client = new HttpClient();
+            _cts = new CancellationTokenSource();
+            try {
+                ProgressText.Text = "Sending request ...";
+                FromServerProgressBar.Value = 10;
+                var response = await client.GetStringAsync("http://localhost:5000/api/get-string", _cts.Token);
+                TextBoxFromServer.Text = response;
+                ProgressText.Text = "Responce obtained";
+                FromServerProgressBar.Value = 100;
+            } catch (OperationCanceledException) {
+                ProgressText.Text = "Operation was cancelled.";
+                FromServerProgressBar.Value = 0;
+            } catch (Exception) {
+                FromServerProgressBar.Value = 0;
+                ProgressText.Text = "An error occurred";
             }
         }
     }
