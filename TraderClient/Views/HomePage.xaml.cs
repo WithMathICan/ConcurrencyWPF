@@ -22,17 +22,34 @@ namespace TraderClient.Views
             CustomersGrid.ItemsSource = _dataService.GetCustomers();
         }
 
+        //private void Add_Click(object sender, RoutedEventArgs e) {
+        //    var newCustomer = new Customer { Id = 99, Name = "New User", City = "Berlin" };
+        //    _dataService.AddCustomer(newCustomer);
+        //    LoadData();
+        //}
         private void Add_Click(object sender, RoutedEventArgs e) {
-            var newCustomer = new Customer { Id = 99, Name = "New User", City = "Berlin" };
-            _dataService.AddCustomer(newCustomer);
-            LoadData();
+            var form = new CustomerFormWindow();
+            if (form.ShowDialog() == true) {
+                _dataService.AddCustomer(form.Customer);
+                LoadData();
+            }
         }
 
+
+        //private void Edit_Click(object sender, RoutedEventArgs e) {
+        //    if (CustomersGrid.SelectedItem is Customer c) {
+        //        c.Name = "Edited Name";
+        //        _dataService.UpdateCustomer(c);
+        //        LoadData();
+        //    }
+        //}
         private void Edit_Click(object sender, RoutedEventArgs e) {
-            if (CustomersGrid.SelectedItem is Customer c) {
-                c.Name = "Edited Name";
-                _dataService.UpdateCustomer(c);
-                LoadData();
+            if (CustomersGrid.SelectedItem is Customer selected) {
+                var form = new CustomerFormWindow(selected);
+                if (form.ShowDialog() == true) {
+                    //CustomersGrid.Items.Refresh();
+                    LoadData();
+                }
             }
         }
 
@@ -45,6 +62,7 @@ namespace TraderClient.Views
 
         private void Refresh_Click(object sender, RoutedEventArgs e) {
             LoadData();
+            //CustomersGrid.Items.Refresh();
         }
     }
 }

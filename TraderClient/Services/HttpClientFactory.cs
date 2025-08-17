@@ -9,7 +9,7 @@ namespace TraderClient.Services
             if (_client == null) {
                 var handler = new HttpClientHandler();
                 _client = new HttpClient(handler) {
-                    BaseAddress = new Uri("https://yourserver/api/")
+                    BaseAddress = new Uri("http://localhost:5000/")
                 };
             }
 

@@ -8,16 +8,21 @@ using TraderClient.Models;
 namespace TraderClient.Services
 {
     public class DataService {
-        private readonly List<Customer> _customers = new() {
+        private readonly List<Customer> _customers = [
             new Customer { Id = 1, Name = "Alice", City = "London" },
             new Customer { Id = 2, Name = "Bob", City = "Paris" }
-        };
+        ];
 
-        public List<Customer> GetCustomers() => new(_customers);
+        public List<Customer> GetCustomers() => [.. _customers];
 
-        public void AddCustomer(Customer c) => _customers.Add(c);
+        public void AddCustomer(Customer c) {
+            _customers.Add(c);
+        }
 
-        public void DeleteCustomer(Customer c) => _customers.Remove(c);
+        public void DeleteCustomer(Customer c) {
+            var customerToRemove = _customers.FirstOrDefault(x => x.Id == c.Id);
+            if (customerToRemove != null)_customers.Remove(customerToRemove);
+        }
 
         public void UpdateCustomer(Customer c) {
             var existing = _customers.Find(x => x.Id == c.Id);

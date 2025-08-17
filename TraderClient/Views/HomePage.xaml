@@ -16,6 +16,10 @@
             <Button Content="Refresh" Click="Refresh_Click" Margin="5"/>
         </StackPanel>
 
-        <DataGrid x:Name="CustomersGrid" AutoGenerateColumns="True"/>
+        <DataGrid x:Name="CustomersGrid" AutoGenerateColumns="True" CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          SelectionMode="Single"
+          SelectionUnit="FullRow"/>
     </DockPanel>
 </Page>
